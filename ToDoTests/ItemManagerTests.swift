@@ -1,5 +1,5 @@
 //
-//  ToDoTests.swift
+//  ItemManagerTests.swift
 //  ToDoTests
 //
 //  Created by Cast Group on 28/06/2018.
@@ -9,10 +9,13 @@
 import XCTest
 @testable import ToDo
 
-class ToDoTests: XCTestCase {
+class ItemManagerTests: XCTestCase {
+    
+    var sut: ItemManager!
     
     override func setUp() {
         super.setUp()
+        sut = ItemManager()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -21,16 +24,16 @@ class ToDoTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_ToDoCount_Initially_IsZero() {
+        XCTAssertEqual(sut.toDoCount, 0)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_DoneCount_Initially_IsZero() {
+        XCTAssertEqual(sut.doneCount, 0)
+    }
+    
+    func test_AddItem_IncreasesToDoCountToOne() {
+        sut.add(ToDoItem(title: ""))
     }
     
 }
