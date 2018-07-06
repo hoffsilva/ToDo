@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import ToDo
 
 class ToDoItemTests: XCTestCase {
@@ -50,4 +51,25 @@ class ToDoItemTests: XCTestCase {
         XCTAssertEqual(item.location?.name, location.name, "should set location")
     }
     
+    func test_EqualsItems_AreEquals() {
+        let first = ToDoItem(title: "Foo")
+        let second = ToDoItem(title: "Foo")
+        XCTAssertEqual(first, second)
+    }
+    
+    func test_Items_WhenLocationsDiffers_AreNotEqual() {
+        let fc = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        let sc = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        let first = Location(name: "Foo", coordinate: fc)
+        let second = Location(name: "Foo", coordinate: sc)
+        XCTAssertEqual(first, second)
+    }
+    
+    func test_Locations_WhenLongitudeDiffers_AreNotEqual() {
+        let fc = CLLocationCoordinate2D(latitude: 0.0, longitude: 1.0)
+        let sc = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        let first = Location(name: "Foo", coordinate: fc)
+        let second = Location(name: "Foo", coordinate: sc)
+        XCTAssertNotEqual(first, second)
+    }
 }
